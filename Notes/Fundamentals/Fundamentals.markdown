@@ -1,4 +1,4 @@
-Bags, Queues, and Stacks
+Bgs, Queues, and Stacks
 ========================
 
 Bags
@@ -18,6 +18,7 @@ Stacks
 
 - LIFO (Last in, first out)
 - Can be used to evaluate fully parenthesized mathematical expressions with the following algo:
+Dijkstra’s two-stack arithmetic expression-evaluation algorithm:
 ■ Push operands onto the operand stack.
 ■ Push operators onto the operator stack.
 ■ Ignore left parentheses.

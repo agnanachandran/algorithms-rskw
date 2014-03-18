@@ -4,7 +4,7 @@ import fileinput
 ops = []
 vals = []
 line = raw_input()
-for s in line.split:
+for s in line.split():
     if s == '(':
         pass
     elif s == '+' or s == '-' or s == '*' or s == '/' or s == 'sqrt':
