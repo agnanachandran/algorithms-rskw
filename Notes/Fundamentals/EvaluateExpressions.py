@@ -1,4 +1,5 @@
 # Evaluates fully-parenthesized expressions delimited by spaces, e.g. the input "( ( 5 + 3 ) - 0.5 ) yields the result 7.5
+import math
 import fileinput
 
 ops = []
