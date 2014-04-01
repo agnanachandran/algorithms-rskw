@@ -74,7 +74,19 @@ for (int i = 0; i < s.length(); i++) {
     hash = (R * hash + s.charAt(i)) % M; // R is some small positive int
 }`
 
+e.g. Java's java.lang.String (uses above method (but doesn't do modulus operation) with R = 31):
+hash = 0
+final int end = count + offset;
+final char[] chars = value;
+for (int i = offset; i < end; ++i) { // Strings use offsets on a char array to back the String (better efficiency)
+    hash = 31*hash + chars[i];
+}
+hashCode = hash; // cache hashCode (will use this upon later calls on hashCode since Strings are immutable)
+return hashCode;
+
 Compound types:
+
+Transaction class:
 
     private final String who;
     private final Date when;

@@ -9,12 +9,31 @@ public class LinearProbingHashST<Key, Value> {
         vals = (Value[]) new Object[M];
     }
 
+    public LinearProbingHashST(int cap) {
+        M = cap;
+        keys = (Key[]) new Object[M];
+        vals = (Value[]) new Object[M];
+    }
+
     private int hash(Key key) {
         return (key.hashCode() % 0x7fffffff) % M;
     }
 
-    private void resize() {
-        // TODO; create 2 new arrays, copy all old keys and values over
+    public int size() {
+        return N;
+    }
+
+    private void resize(int cap) {
+        LinearProbingHashST<Key, Value> t = new LinearProbingHashST<Key, Value>();
+        t = new LinearProbingHashST<Key, Value>(cap);
+        for (int i = 0; i < M; i++) {
+            if (keys[i] != null) {
+                t.put(keys[i], vals[i]);
+            }
+        }
+        keys = t.keys;
+        vals = t.vals;
+        M = t.M;
     }
 
     public void put(Key key, Value val) {
@@ -40,8 +59,18 @@ public class LinearProbingHashST<Key, Value> {
             }
         }
         return null; // Key not found
+    }
+
+    public boolean contains(Key key) {
+        if (key == null) return false;
+        if (get(key) == null) return false;
+        return true;
 
     }
 
+    public void delete(Key key) {
+        if (!contains(key)) return;
+        
+    }
     // TODO: deletion
 }

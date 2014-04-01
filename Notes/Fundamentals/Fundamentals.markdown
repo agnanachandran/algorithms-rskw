@@ -1,4 +1,4 @@
-Bgs, Queues, and Stacks (1.3)
+Bags, Queues, and Stacks (1.3)
 =============================
 
 Bags
@@ -42,4 +42,3 @@ We will refer to the objects as 'sites', the pairs as 'connections', and the equ
 Both sites and components will be identified by int values between 0 and N-1
 
 Refer to UF.py for the Union find algorithm
-

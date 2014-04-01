@@ -17,16 +17,23 @@ class ResizingArrayStack(object):
         return self.items.pop()
 
     def __iter__(self):
+        self.current = len(self.items) - 1
         return self
 
     def next(self):
-        if self.current >= self.size():
+        if self.current < 0:
             raise StopIteration
         else:
-            self.current += 1
-            return self.items[self.current - 1]
+            self.current -= 1
+            return self.items[self.current + 1]
 
-#stack = ResizingArrayStack()
-#stack.push(3)
-#for x in stack:
-    #print x
+if __name__ == '__main__':
+    stack = ResizingArrayStack()
+    stack.push(5)
+    stack.push(2)
+    stack.push(-1)
+    print stack.pop()
+    for st in stack:
+        print st
+    for st in stack:
+        print st
