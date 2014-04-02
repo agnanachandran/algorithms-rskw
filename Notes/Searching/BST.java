@@ -122,4 +122,18 @@ public class BST<Key extends Comparable<Key>, Value> {
         printInOrder(x.right);
     }
 
+    public void printInOrder() {
+        printInOrder(root);
+    }
+
+    public static void main(String[] args) {
+       BST<Character, Integer> bst = new BST<Character, Integer>();
+       bst.put('A', 4);
+       for (int i = 0; i < 15; i++) {
+           long character = Math.round(Math.random()*25) + (long) 65;
+           bst.put((char) character, 4);
+       }
+       bst.printInOrder();
+    }
+
 }

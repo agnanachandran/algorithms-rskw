@@ -100,5 +100,20 @@ public class SeparateChainingHashST<Key, Value> {
                 prev.next = current.next;
             }
         }
+
+        public Node retrieveMiddle() {
+            if (first == null) {
+                return null;
+            }
+
+            Node slow = first;
+            Node fast = first.next;
+
+            while (fast != null && fast.next != null) {
+                slow = slow.next;
+                fast = fast.next.next;
+            }
+            return slow;
+        }
     }
 }

@@ -68,9 +68,46 @@ public class LinearProbingHashST<Key, Value> {
 
     }
 
+
+    //We can't just set the key's table position to null, 
+    //since searches for a key may prematurely stop 
+    //(since they stop once seeing a null key),
+    //and keys arent' necessarily at hash(key)
+    //(due to how linear probing sequentially tries elements).
+    //Thus, we need to reinsert into the table all of the keys
+    //in the cluster to the right of the deleted key 
+    //(wrapping around as necessary; just stop once you hit a null key)
     public void delete(Key key) {
         if (!contains(key)) return;
-        
+        int i = hash(key);
+        while (!key.equals(keys[i])) {
+            i = (i + 1) % M;
+        }
+        // Now i is the index that matches the key
+        keys[i] = null;
+        vals[i] = null;
+        i = (i + 1) % M;
+        while (keys[i] != null) {
+            Key keyToReput = keys[i];
+            Value valToReput = vals[i];
+            keys[i] = null;
+            vals[i] = null;
+            N--;
+            put(keyToReput, valToReput);
+            i = (i + 1) % M;
+        }
+        N--;
+        if (N > 0 && N == M/8) {
+            resize(M/2);
+        }
     }
-    // TODO: deletion
+
+    public static void main(String[] args) {
+        LinearProbingHashST<String, Integer> st = new LinearProbingHashST<String, Integer>();
+        st.put("Yo", 9);
+        System.out.println("Value of 'Yo': " + st.get("Yo"));
+        System.out.println("Size: " + st.size());
+        st.delete("Yo");
+        System.out.println(st.get("Yo"));
+    }
 }

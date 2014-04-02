@@ -11,16 +11,20 @@ Deletion: typically implemented in one of 2 ways:
 
 calling `put (key, null)` is an easy (lazy) implementation of delete
 
+Pros and cons of symbol-table implementations:
+
+(Refer to pp 386).
 
 Binary Search Trees
 -------------------
 
-Deletion:
+**Deletion**:
 
 Deleting a node with zero children:
-    - set node to null
+- set node to null
+
 Deleting a node with 1 child:
-    - Replace this node with its child
+- Replace this node with its child
 Deleting a node with 2 children:
 
 Delete a node `x` by replacing it with its successor. Because x has a right child, its successor is the node with the smallest key in the right subtree (The successor is the minimum key in the right subtree, but since it's in the right subtree, it's still larger than the root key).
@@ -46,7 +50,7 @@ General idea:
 
 Hash function:
 
-- Transform a given key into an index for the array. 
+- Transform a given key into an index for the array.
 - Typically: use modular hashing; choose a prime numbered array size `M`, and for a positive integer `k`, compute `k % m`.
 
 - So, `hash(key) == (key.hashCode() & 0x7fffffff) % M`
@@ -56,7 +60,7 @@ Reasons M should be prime:
 
 1) Lower probability of hash collisions
     - Suppose you're hashing area codes; 905, 519, 416, etc., typically the middle digit is 0 or 1 for historical reasons, so if the array size is 10^2 == 100, then only the last two digits matter, and you get a greater concentration of entries from array indices 0 through 19.
-    - Similarly, for IP addresses, which are binary numbers, M should not be of the form 2^k (e.g., if M=64, then 128, 256, 512, would all map to index 0). 
+    - Similarly, for IP addresses, which are binary numbers, M should not be of the form 2^k (e.g., if M=64, then 128, 256, 512, would all map to index 0).
 
 2) In the hash resolution method of linear probing, when an entry is already in a bucket, the next bucket tried is the original bucket's index, OBI,  PLUS some step size, SS. Then the next bucket is OBI + 2*SS, then it's OBI + 2*SS (all of these are mod M). In order to cover all the buckets eventually, SS and M should be co-prime (aka relatively prime).
 
@@ -66,23 +70,25 @@ Hashing different types:
 ------------------------
 
 Floats: Use modular hashing on the binary rep. of the key
-Strings: 
+Strings:
 Recall that charAt() returns a char value in Java, which is a 16-bit nonnegative integer. If R is greater than any character value, this computation would be equivalent to treating the String as an N-digit base-R integer, computing the remainder that results when dividing that number by M. R should be sufficiently small so overflow doesn't occur.
 
-`int hash = 0;
-for (int i = 0; i < s.length(); i++) {
-    hash = (R * hash + s.charAt(i)) % M; // R is some small positive int
-}`
+    int hash = 0;
+    for (int i = 0; i < s.length(); i++) {
+        hash = (R * hash + s.charAt(i)) % M; // R is some small positive int
+    }
 
 e.g. Java's java.lang.String (uses above method (but doesn't do modulus operation) with R = 31):
-hash = 0
-final int end = count + offset;
-final char[] chars = value;
-for (int i = offset; i < end; ++i) { // Strings use offsets on a char array to back the String (better efficiency)
-    hash = 31*hash + chars[i];
-}
-hashCode = hash; // cache hashCode (will use this upon later calls on hashCode since Strings are immutable)
-return hashCode;
+
+    hash = 0
+    final int end = count + offset;
+    final char[] chars = value;
+    for (int i = offset; i < end; ++i) { // Strings use offsets on a char array to back the String (better efficiency)
+        hash = 31*hash + chars[i];
+    }
+    hashCode = hash; // cache hashCode (will use this upon later calls on hashCode since Strings are immutable)
+    return hashCode;
+
 
 Compound types:
 
