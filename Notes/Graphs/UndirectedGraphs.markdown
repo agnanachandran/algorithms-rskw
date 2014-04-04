@@ -58,4 +58,26 @@ A *bipartite graph* is one whose vertices can be divided into 2 sets such that a
 
 ![for example](bipartite.png)
 
+Ways of representing a Graph API:
 
+- An *adjacency matrix* is a V by V boolean array; if two vertices `i` and `j` have an edge between them, then `arr[i][j]` should be true. However this is space inefficient; the space cost of V^2 is too high (graphs with millions of vertices are common).
+
+- An array of edges, using an Edge class with 2 instance variables of type int; each corresponding to a vertex. However, finding `adj(v)` (finds all the edges adjacent to vertex `v`) would involve examining all the edges, and thus it would be slow.
+
+- An array of *adjacency lists*, where a vertex-indexed array of lists of the vertices adjacent to each vertex. Thus, each array element would be a vertex, and the Vertex class defines an instance variable for the list of array indices that the vertex is connected to. The list itself can just be a set or a bag (multi-set, to allow for parallel edges). This is the best approach so far and is what we will use.
+
+We use a bag in our implementation, but one can use a symbol table if they want operations such as adding or deleting a vertex. One can also use a Set instead of a Bag for adjacency lists.
+
+A summary of these implementations is below:
+
+![big o](big-o.png)
+
+Depth-first Search
+------------------
+
+The DFS works recursively as follows:
+
+To visit a vertex, mark it as having been visited in a `marked[]` int array.
+Then, recursively visit all adjacent nodes that have not yet been visited. Thus, each node will be visited once.
+
+We can also use this to determine if a graph is connected. Perform a dfs which maintains the # of elements that are set to true in the marked[] array. If this number is equal to the # of vertices, the graph must be connected (since all the vertices were able to be visited).
