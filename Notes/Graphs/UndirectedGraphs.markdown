@@ -72,8 +72,8 @@ A summary of these implementations is below:
 
 ![big o](big-o.png)
 
-Depth-first Search
-------------------
+Depth-first Search (DFS)
+------------------------
 
 The DFS works recursively as follows:
 
@@ -81,3 +81,10 @@ To visit a vertex, mark it as having been visited in a `marked[]` int array.
 Then, recursively visit all adjacent nodes that have not yet been visited. Thus, each node will be visited once.
 
 We can also use this to determine if a graph is connected. Perform a dfs which maintains the # of elements that are set to true in the marked[] array. If this number is equal to the # of vertices, the graph must be connected (since all the vertices were able to be visited).
+
+Breadth-first Search (BFS)
+--------------------------
+
+DFS isn't great for solving the Single-source shortest path problem (Is there a path from a source vertex to a given target vertex `v`; if so, what's the shortest such path (minimal # of edges)?).
+
+BFS on the other hand is based on solving this problem. 

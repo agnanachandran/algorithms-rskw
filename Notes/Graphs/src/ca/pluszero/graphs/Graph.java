@@ -1,3 +1,5 @@
+package ca.pluszero.graphs;
+
 import java.util.*;
 import java.io.*;
 
@@ -54,7 +56,8 @@ public class Graph {
         return output;
     }
 
-    public static void main(String[] args) {
+
+    public static Graph createDefaultGraph() {
         Graph g = new Graph(9);
         g.addEdge(0, 1);
         g.addEdge(0, 2);
@@ -63,42 +66,16 @@ public class Graph {
         g.addEdge(6, 4);
         g.addEdge(5, 3);
         g.addEdge(5, 4);
+        g.addEdge(6, 7);
         g.addEdge(7, 8);
+        return g;
+    }
+
+    public static void main(String[] args) {
+        Graph g = createDefaultGraph();
         System.out.println(g);
+        System.out.println();
+        Search s = new Search(g, 0);
     }
 
-    public static class Search {
-
-        private boolean[] marked;
-        private int count;
-
-        public Search(Graph g, int src) {
-            marked = new boolean[g.V()];
-            dfs(g, src);
-        }
-
-        public void dfs(Graph g, int src) {
-            marked[src] = true;
-            count++;
-            for (int vertex : g.adj(src)) {
-                if (!marked[vertex]) {
-                    dfs(g, vertex);
-                }
-            }
-        }
-
-        //public static boolean isGraphConnected(Graph g) {
-            //Search search = new Search(g, 0);
-            //return search.count() == g.V();
-        //}
-
-        public boolean marked(int w) {
-            return marked[w];
-        }
-
-        public int count() {
-            return count;
-        }
-        
-    }
 }
