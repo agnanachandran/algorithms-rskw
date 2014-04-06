@@ -85,6 +85,55 @@ We can also use this to determine if a graph is connected. Perform a dfs which m
 Breadth-first Search (BFS)
 --------------------------
 
-DFS isn't great for solving the Single-source shortest path problem (Is there a path from a source vertex to a given target vertex `v`; if so, what's the shortest such path (minimal # of edges)?).
+DFS isn't great for solving the Single-source shortest path problem (Is there a path from a source vertex `s` to a given target vertex `v`; if so, what's the shortest such path (minimal # of edges)?).
 
-BFS on the other hand is based on solving this problem. 
+BFS on the other hand is based on solving this problem. To find a shortest path, we start at `s` and check for `v` among all vertices we can reach by following 1 edge, then by following 2 edges, and so on till `v` is found. Note that the BFS uses an explicit queue, while the recursive DFS uses an implicit stack (through recursion).
+
+This can be done by maintaining a queue of vertices that have been marked but whose adjacency lists have not been checked. We put the source vertex `s` on the queue, then perform these steps:
+
+1) Take the next vertex `v` from the queue and mark it
+2) Put onto the queue all unmarked vertices adjacent to `v`
+
+For example:
+
+Consider the following graph
+
+![bfs](bfs.png)
+
+    Queue: 0
+
+    1) Dequeue 0
+
+    Queue:
+
+    2) Enqueue 1, 2, 5 (all unmarked adjacent nodes) and mark them
+
+    Queue: 1, 2, 5
+
+    3) Dequeue 1
+
+    Queue: 2, 5
+
+    4) Enqueue nothing (all adjacent nodes are already marked)
+
+    Queue: 2, 5
+
+    5) Dequeue 2
+
+    Queue: 5
+
+    6) Enqueue 3, 4 (all unmarked adjacent nodes) and mark them
+
+    Queue: 5, 3, 4
+
+    7) Dequeue 5, 3, 4 (nothing to enqueue after each dequeue since the adjacent nodes are marked). We skip these steps for simplicity.
+
+    Queue: 3, 4
+
+    Queue: 4
+
+    Queue:
+
+    8) Queue is empty: we're done.
+
+
