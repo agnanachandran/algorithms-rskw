@@ -137,3 +137,25 @@ Consider the following graph
     8) Queue is empty: we're done.
 
 
+Connectedness
+-------------
+
+DFS can be used to find all the connected components of a graph. A graph is processed once through DFS, and afterwards, `connected(v, w)` can be used to check if vertices v and w are connected in `O(1)` time.
+3
+Steps:
+
+1) For every unmarked vertex `v` in the graph `g`: call dfs(g, v)
+2)`dfs(g,v)` will mark every vertex `v` with an id. the id used is incremented after each iteration of step 1
+3) connected(v, w) -> id[v] == id[w];
+
+DFS is faster than the union-find algorithm in practice since it provides a constant-time guarantee, which union-find does not. In practice, the difference is negligible, and union-find is faster since it doesn't have to build a full representation of the graph.
+
+Additionally, union-find is an "online" algorithm, (can check if 2 vertices are connected in near constant-time even while adding edges), while DFS must first pre-process the graph.
+
+
+Detecting Cycles and Bipartiteness
+----------------------------------
+
+DFS can also be used to determine if a graph contains a cycle (assuming no self-loops and no parallel edges).
+
+Consider a graph with 4 vertices connected in a square formation. Starting a DFS at one vertex will eventually lead back to the original vertex, if it wasn't already marked. Thus, if the vertex is marked, and it's not the vertex that you were JUST at (i.e., the vertex that led you to the current vertex), then there must be a cycle.

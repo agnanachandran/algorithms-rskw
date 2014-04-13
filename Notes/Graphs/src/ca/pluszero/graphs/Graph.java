@@ -6,7 +6,7 @@ import java.io.*;
 public class Graph {
     private final int V; // # of vertices
     private int E; // # of edges
-    private Set<Integer>[] adj; // adjacency lists
+    private Set<Integer>[] adj; // adjacency lists; an array of sets; adj[i] contains all the vertices adjacent to vertex i
 
     public Graph(int V) {
         this.V = V; this.E = 0;
@@ -67,7 +67,6 @@ public class Graph {
         g.addEdge(5, 3);
         g.addEdge(5, 4);
         g.addEdge(6, 7);
-        g.addEdge(7, 8);
         return g;
     }
 
