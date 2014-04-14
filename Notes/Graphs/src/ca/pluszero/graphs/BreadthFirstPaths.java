@@ -18,15 +18,15 @@ public class BreadthFirstPaths {
     private void bfs(Graph g, int v) {
 
         Queue<Integer> q = new ArrayDeque<Integer>();
-        q.add(v);
+        q.add(v); // add src vertex to queue
         marked[v] = true;
         while (!q.isEmpty()) {
-            int curr = q.remove();
+            int curr = q.remove(); // dequeue one off
             for (int adjVertex : g.adj(curr)) {
                 if (!marked[adjVertex]) {
-                    q.add(adjVertex);
+                    q.add(adjVertex); // queue all unmarked adjacent nodes
                     marked[adjVertex] = true;
-                    edgeTo[adjVertex] = curr;
+                    edgeTo[adjVertex] = curr; // used for finding shortest path to any node
                 }
             }
         }

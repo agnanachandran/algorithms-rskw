@@ -63,6 +63,7 @@ public class Graph {
         g.addEdge(0, 2);
         g.addEdge(0, 6);
         g.addEdge(0, 5);
+        g.addEdge(1, 3);
         g.addEdge(6, 4);
         g.addEdge(5, 3);
         g.addEdge(5, 4);

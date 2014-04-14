@@ -156,6 +156,28 @@ Additionally, union-find is an "online" algorithm, (can check if 2 vertices are 
 Detecting Cycles and Bipartiteness
 ----------------------------------
 
+Cycles:
+
 DFS can also be used to determine if a graph contains a cycle (assuming no self-loops and no parallel edges).
 
 Consider a graph with 4 vertices connected in a square formation. Starting a DFS at one vertex will eventually lead back to the original vertex, if it wasn't already marked. Thus, if the vertex is marked, and it's not the vertex that you were JUST at (i.e., the vertex that led you to the current vertex), then there must be a cycle.
+
+
+Bipartiteness:
+
+DFS can also be used to check if a graph is two-colorable, which is equivalent to the question, is a graph bipartite?
+
+We can represent 2 colors with the booleans `true` and `false`.
+
+When doing our DFS, for nodes adjacent to a node `n`, we mark the adjacent node as being the opposite value of `n`. For example, if node 3 was next to nodes 5, and 6. and node 3's value was false, then node 5 and 6 should be true. Lastly, if during our DFS, we find a marked node that has the same value as node `n`, the graph must not be bipartite.
+
+Symbol Graphs
+-------------
+
+Instead of indexing a graph by its vertices; what if we wanted the graph to contain Strings, or other data types, instead of just the vertex #. We can use a symbol table to map Strings to the vertex #s, and a String array to map the vertex #s to their Strings.
+
+This is done by inserting into a symbol table the string and the # of strings seen so far (which will be the vertex #).
+
+Then, for every key in the symbol table, set keys[st.get(key)] = key
+so we can index the keys as well.
+

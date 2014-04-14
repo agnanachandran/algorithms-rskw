@@ -24,4 +24,10 @@ public class CycleFinder {
         return hasCycle;
     }
 
+    public static void main(String[] args) {
+        CycleFinder cf = new CycleFinder(Graph.createDefaultGraph());
+        System.out.println(Graph.createDefaultGraph());
+        System.out.println(cf.hasCycle);
+    }
+
 }
